@@ -1,66 +1,65 @@
-pub fn new(input: Vec<String>) -> Vec<Vec<String>>{
+#[derive(Clone)]
+pub struct Array2<T: Clone> {
+    width: usize,
+    height: usize,
+    data: Vec<T>
+}
 
-    let mut row_count = 0;
-    let mut column_count = 0;
-    let mut arr2: Vec<Vec<String>>;
-    for pixel in input{
+impl<T: Clone> Array2<T>{
 
-        if pixel = "\n" {
-            row_count += 1;
+    pub fn get(&self, row:usize, col:usize) -> &T {
+        // find how to row and column and return desired element in 1D vector
+        &self.data[(row * self.width) + col]
+    }
+
+    fn get_index(&self, column: usize, row: usize) -> Option<&T> {
+        //if column < self.width && row < self.height {
+        if row * self.width + column < self.data.len(){
+            Some(&self.data[row * self.width + column])
         }
         else {
-            arr2[row_count][column_count] = pixel as String;
+            None
         }
-        column_count += 1;
     }
-}
-/*
-pub fn get_width(column: usize) -> Option<_>{
-
-}
-
-pub fn get_height(row: usize) -> Option<_>{
-
-}
-*/
-pub fn iter_row_major(width: i16, height: i16, arr2: Vec<Vec<i16>>) -> Vec<i16> {
-
-    let mut row_major: Vec<i16>;
-    let mut num: i16 = 0;
-
-    for column in width {
-        for row in height {
-            row_major[num] = arr2[row][column];
-            num += 1;
-        }
-        
+    
+    pub fn iter_row_major(&self) -> impl Iterator<Item = (usize, usize, &T)> {
+        (0..self.height).flat_map(move |r| (0..self.width).map(move |c| (c, r, self.get_index(c, r).unwrap())))
     }
 
-
-}
-
-pub fn iter_column_major(width: i32, height: i32, arr2: Vec<Vec<i16>>) -> Vec<i16> {
-
-    let mut column_major: Vec<i16>;
-    let mut num = 0;
-
-    for row in height {
-        for column in width {
-            column_major[num] = arr2[row][column];
-            num += 1;
-        }
-        
+    pub fn iter_column_major(&self) -> impl Iterator<Item = (usize, usize, &T)> {
+        (0..self.width).flat_map(move |c| (0..self.height).map(move |r| (c, r, self.get_index(c, r).unwrap())))
     }
 
-}
+    pub fn from_row_major(width: usize, height: usize, data: Vec<T>) -> Self{
+        Array2{
+            width,
+            height,
+            data,
+        }
+    }
 
-#[cfg(test)]
-mod tests {
-    //use super::*;
+    pub fn from_col_major(width: usize, height: usize, data: Vec<T>) -> Self{
+        let x = Array2{
+            width,
+            height,
+            data,
+        };
+        let mut vec = vec![];
+        for (_r, _c, d) in x.iter_column_major(){
+            vec.push(d.clone());
+        }
+        Array2{
+            width,
+            height,
+            data: vec,
+        }
+    }
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    pub fn single_val(width: usize, height: usize, data: T) -> Self{
+        Array2{
+            width,
+            height,
+            data: vec![data; width*height]
+        }
     }
 }
