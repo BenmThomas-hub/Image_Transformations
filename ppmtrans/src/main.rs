@@ -43,3 +43,24 @@ fn read(input: Option<String>) -> Array2<i8> {
         return arr2;
 
     }
+
+    fn rotate_180(arr: Array2){
+        let rotU = Array2.from_col_major(arr.width, arr.height, arr.iter_row_major.collect().reverse());
+    }
+    
+    fn transpose(arr: Array2){
+        let rotT = Array2.from_col_major(arr.height, arr.width, arr.iter_row_major);
+    }
+
+    fn rotate_90(arr: Array2){
+        let slice_list = [];
+        for chunk in arr.data.chunk(arr.width){
+            slice_list.push(chunk);
+        }
+        let flipped = [];
+        for i in slice_list.rev(){
+            for data in i{
+                flipped.push(data);
+            }
+        }
+    }
