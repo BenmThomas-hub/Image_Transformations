@@ -177,12 +177,12 @@ fn rotate_0(arr: Array2<(imgtype::Rgb)>) -> Array2<(imgtype::Rgb)>{
     pix1, pix0, data
 }
 
-fn rotate_0(arr: Array2<(imgtype::Rgb)>) -> Array2<(imgtype::Rgb)>{
+fn rotate_horiz(arr: Array2<(imgtype::Rgb)>) -> Array2<(imgtype::Rgb)>{
         
     pix1, width - pix0 - 1, data
 }
 
-fn rotate_0(arr: Array2<(imgtype::Rgb)>) -> Array2<(imgtype::Rgb)>{
+fn rotate_vert(arr: Array2<(imgtype::Rgb)>) -> Array2<(imgtype::Rgb)>{
         
     width - pix1 - 1, pix0, data
 }
