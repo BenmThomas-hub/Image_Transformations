@@ -21,6 +21,18 @@ impl<T: Clone> Array2<T>{
             None
         }
     }
+
+    pub fn get_height(&self) -> usize{
+        (&self.height).clone()
+    }
+
+    pub fn get_width(&self) -> usize{
+        (&self.width).clone()
+    }
+
+    pub fn set_index(&mut self, row:usize, col:usize, data: T) -> () {
+        self.data[(row * self.width) + col] = data;
+    }
     
     pub fn iter_row_major(&self) -> impl Iterator<Item = (usize, usize, &T)> {
         (0..self.height).flat_map(move |r| (0..self.width).map(move |c| (c, r, self.get_index(c, r).unwrap())))
