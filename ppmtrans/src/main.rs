@@ -1,10 +1,10 @@
 use clap::Parser;
 use array2::Array2;
 use csc411_image::*;
-use std::env;
+//use std::env;
 use std::time::Instant;
-use std::io;
-use std::io::BufRead;
+//use std::io;
+//use std::io::BufRead;
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 
@@ -155,7 +155,7 @@ fn rotate_180_row(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb> {
         arr_rot.set_index(arr.get_height() - pixel.1 - 1, arr.get_width() - pixel.0 - 1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
 
     return arr_rot;
 }
@@ -168,7 +168,7 @@ fn rotate_180_col(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb> {
         arr_rot.set_index(arr.get_height() - pixel.0 - 1, arr.get_width() - pixel.1 - 1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
 
     return arr_rot;
 }
@@ -183,10 +183,9 @@ fn transpose_row(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb> {
     let now = Instant::now();
     for pixel in arr.iter_row_major(){
         arr_rot.set_index(pixel.0, pixel.1, pixel.2.clone());
-        // arr.get_width() - pixel.0 - 1, arr.get_height() - pixel.1 - 1, pixel.2.clone()
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
 
     return arr_rot;
 }
@@ -199,7 +198,7 @@ fn transpose_col(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb> {
         arr_rot.set_index( pixel.0, pixel.1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
 
     return arr_rot;
 }
@@ -212,7 +211,7 @@ fn rotate_90_col(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(pixel.0, arr.get_height() - pixel.1 - 1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
 
     return arr_rot;
     }
@@ -225,7 +224,7 @@ fn rotate_90_row(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(pixel.0, arr.get_height() - pixel.1 - 1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
 
     return arr_rot;
 
@@ -250,7 +249,7 @@ fn rotate_270_row(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(arr.get_width() - pixel.0 - 1, pixel.1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
         
     return arr_rot;
 }
@@ -263,7 +262,7 @@ fn rotate_270_col(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(arr.get_width() - pixel.0 - 1, pixel.1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
         
     return arr_rot;
 }
@@ -276,7 +275,7 @@ fn rotate_0_row(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
     //     arr_rot.set_index(pixel.1, pixel.0, pixel.2.clone());
     // }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
     return arr_rot;
 }
 
@@ -288,7 +287,7 @@ fn rotate_0_col(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
     //    arr_rot.set_index(pixel.1, pixel.0, pixel.2.clone());
     //}
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
     return arr_rot;
 }
 
@@ -300,7 +299,7 @@ fn rotate_horiz_row(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(pixel.1, arr.get_width() - pixel.0 - 1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
     return arr_rot;
 }
 
@@ -312,7 +311,7 @@ fn rotate_horiz_col(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(pixel.1, arr.get_width() - pixel.0 - 1, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
     return arr_rot;
 }
 
@@ -324,7 +323,7 @@ fn rotate_vert_row(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(arr.get_height() - pixel.1 - 1, pixel.0, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
     return arr_rot;
 }
 
@@ -336,6 +335,6 @@ fn rotate_vert_col(arr: Array2<imgtype::Rgb>) -> Array2<imgtype::Rgb>{
         arr_rot.set_index(arr.get_height() - pixel.1 - 1, pixel.0, pixel.2.clone());
     }
     let elapsed = now.elapsed();
-    //eprintln!("{:.2?}", elapsed);
+    eprintln!("{:.2?}", elapsed);
     return arr_rot;
 }
