@@ -5,7 +5,7 @@ pub struct Array2<T: Clone> {
     data: Vec<T>
 }
 
-impl<T: Clone> Array2<T>{
+impl<T: Clone> Array2<T> {
 
     pub fn get(&self, row:usize, col:usize) -> &T {
         // find how to row and column and return desired element in 1D vector
